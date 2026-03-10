@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bimanual Scooping – Team 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <p class="sidebar-label">Contents</p>
+      <ul class="sidebar-links">
+        <li><a href="#overview" class="nav-link active" data-section="overview">Overview</a></li>
+        <li><a href="#flowchart" class="nav-link" data-section="flowchart">Flowchart</a></li>
+        <li><a href="#task1" class="nav-link" data-section="task1">Task 1: Manipulation</a></li>
+        <li><a href="#task2" class="nav-link" data-section="task2">Task 2: Manip. &amp; Loco.</a></li>
+        <li><a href="#task3" class="nav-link" data-section="task3">Task 3: Scooping</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Mobile nav toggle -->
+  <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Main Content -->
+  <main class="content">
+
+    <!-- 1. Title & Authors -->
+    <header class="hero" id="top">
+      <div class="hero-inner">
+        <p class="hero-tag">Stanford &middot; Winter 2026</p>
+        <h1 class="hero-title">Bimanual Scooping <span class="hero-team">Team 2</span></h1>
+        <p class="hero-description">
+          Exploring bimanual coordination strategies for robust object manipulation,
+          locomotion-integrated grasping, and granular material scooping with dual robotic arms.
+        </p>
+        <div class="hero-authors">
+          <span class="author">Author One</span>
+          <span class="author-sep">&middot;</span>
+          <span class="author">Author Two</span>
+          <span class="author-sep">&middot;</span>
+          <span class="author">Author Three</span>
+          <span class="author-sep">&middot;</span>
+          <span class="author">Author Four</span>
+        </div>
+        <p class="hero-affiliation">Stanford University</p>
+        <div class="hero-links">
+          <a href="#" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Paper PDF
+          </a>
+          <a href="#" class="btn btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            Code
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. Overview Video -->
+    <section class="section" id="overview">
+      <div class="video-placeholder main-video">
+        <div class="placeholder-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <p class="placeholder-label">Overview Video Coming Soon</p>
+      </div>
+      <p class="caption">
+        <strong>Overview.</strong> A high-level demonstration of our bimanual scooping pipeline,
+        showcasing coordinated dual-arm manipulation across three progressively challenging tasks.
+      </p>
+    </section>
+
+    <!-- 3. General Flowchart -->
+    <section class="section" id="flowchart">
+      <div class="section-header">
+        <h2>System Pipeline</h2>
+      </div>
+      <p class="section-text">
+        Our approach decomposes bimanual scooping into a modular pipeline: perception,
+        grasp planning, coordinated motion generation, and adaptive force control. Below
+        is the end-to-end system flowchart illustrating how each module connects.
+      </p>
+      <div class="figure-placeholder figure-wide">
+        <p class="placeholder-label">System Flowchart Placeholder</p>
+        <p class="placeholder-sub">End-to-end pipeline: Perception → Planning → Coordination → Execution</p>
+      </div>
+      <p class="caption">
+        <strong>Figure 1.</strong> End-to-end system architecture. Sensory input is processed through
+        a perception module, followed by task-specific planning and bimanual coordination layers.
+      </p>
+    </section>
+
+    <!-- 4. Task 1: Manipulation -->
+    <section class="section" id="task1">
+      <div class="section-header">
+        <span class="task-label">Task 1</span>
+        <h2>Manipulation</h2>
+      </div>
+      <p class="section-text">
+        The first task focuses on bimanual object manipulation — coordinating two robotic arms
+        to grasp, reorient, and transfer rigid objects. We explore contact-rich strategies that
+        leverage complementary hand roles (one stabilising, one manipulating) for robust pick-and-place.
+      </p>
+      <div class="video-placeholder">
+        <div class="placeholder-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <p class="placeholder-label">Task 1 Video Coming Soon</p>
+      </div>
+      <p class="caption">Demonstration of bimanual manipulation on rigid household objects.</p>
+
+      <div class="figures-row">
+        <div class="figure">
+          <div class="figure-placeholder">
+            <p class="placeholder-label">Grasp Planning Diagram</p>
+          </div>
+          <p class="caption"><strong>Figure 2a.</strong> Dual-arm grasp planning approach for complementary contact.</p>
+        </div>
+        <div class="figure">
+          <div class="figure-placeholder">
+            <p class="placeholder-label">CV Method Diagram</p>
+          </div>
+          <p class="caption"><strong>Figure 2b.</strong> Vision pipeline for object pose estimation and grasp selection.</p>
+        </div>
+      </div>
+
+      <div class="figures-row">
+        <div class="figure figure-full">
+          <div class="figure-placeholder">
+            <p class="placeholder-label">Manipulation Results</p>
+          </div>
+          <p class="caption"><strong>Figure 2c.</strong> Quantitative results across object categories showing success rates.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Task 2: Manipulation & Locomotion -->
+    <section class="section" id="task2">
+      <div class="section-header">
+        <span class="task-label">Task 2</span>
+        <h2>Manipulation &amp; Locomotion</h2>
+      </div>
+      <p class="section-text">
+        The second task integrates whole-body locomotion with bimanual manipulation. The robot
+        must navigate to target objects, coordinate its base motion with arm trajectories, and
+        perform stable grasps while in motion — requiring tight coupling between locomotion
+        planning and manipulation control.
+      </p>
+      <div class="video-placeholder">
+        <div class="placeholder-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <p class="placeholder-label">Task 2 Video Coming Soon</p>
+      </div>
+      <p class="caption">Mobile manipulation demo: navigating to and grasping objects while in motion.</p>
+
+      <div class="figures-row">
+        <div class="figure">
+          <div class="figure-placeholder">
+            <p class="placeholder-label">Loco-Manipulation Pipeline</p>
+          </div>
+          <p class="caption"><strong>Figure 3a.</strong> Integrated locomotion and manipulation planning architecture.</p>
+        </div>
+        <div class="figure">
+          <div class="figure-placeholder">
+            <p class="placeholder-label">Trajectory Visualization</p>
+          </div>
+          <p class="caption"><strong>Figure 3b.</strong> Base and end-effector trajectory coordination during approach.</p>
+        </div>
+      </div>
+
+      <div class="figures-row">
+        <div class="figure figure-full">
+          <div class="figure-placeholder">
+            <p class="placeholder-label">Locomotion + Manipulation Results</p>
+          </div>
+          <p class="caption"><strong>Figure 3c.</strong> Task completion rates comparing decoupled vs. integrated planning.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Task 3: Scooping -->
+    <section class="section" id="task3">
+      <div class="section-header">
+        <span class="task-label">Task 3</span>
+        <h2>Scooping</h2>
+      </div>
+      <p class="section-text">
+        The final and most challenging task: bimanual scooping of granular and deformable materials.
+        Both arms must coordinate to form a scoop geometry, penetrate the material, and lift without
+        excessive spillage. This requires adaptive force control and real-time compliance adjustment
+        based on material feedback.
+      </p>
+      <div class="video-placeholder">
+        <div class="placeholder-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <p class="placeholder-label">Task 3 Video Coming Soon</p>
+      </div>
+      <p class="caption">Bimanual scooping of granular material with adaptive force control.</p>
+
+      <div class="figures-row">
+        <div class="figure">
+          <div class="figure-placeholder">
+            <p class="placeholder-label">Scoop Geometry Planning</p>
+          </div>
+          <p class="caption"><strong>Figure 4a.</strong> Coordinated scoop pose generation for granular materials.</p>
+        </div>
+        <div class="figure">
+          <div class="figure-placeholder">
+            <p class="placeholder-label">Force Control Diagram</p>
+          </div>
+          <p class="caption"><strong>Figure 4b.</strong> Adaptive compliance controller for material interaction.</p>
+        </div>
+      </div>
+
+      <div class="figures-row">
+        <div class="figure figure-full">
+          <div class="figure-placeholder">
+            <p class="placeholder-label">Scooping Results</p>
+          </div>
+          <p class="caption"><strong>Figure 4c.</strong> Material retention rates across scooping strategies and substrates.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Footer -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <hr class="footer-rule">
+        <p class="footer-affiliation">Stanford University</p>
+        <p class="footer-course">Robotic Manipulation &middot; Winter 2026</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+title: Bimanual Scooping – Team 2
+description: Exploring bimanual coordination strategies for robust object manipulation
+baseurl: "/scooping.github.io"
+url: "https://alazc.github.io"
+
+# Skip Jekyll processing for this static site
+exclude:
+  - README.md
