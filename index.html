@@ -52,7 +52,7 @@
         </div>
         <p class="hero-equal">Equal contribution, listed alphabetically</p>
         <div class="hero-links">
-          <a href="#" class="btn btn-primary">
+          <a href="https://github.com/saimlau/wi26me326team2" class="btn btn-primary">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
             Code
           </a>
@@ -69,12 +69,25 @@
         A high-level demonstration of our bimanual scooping pipeline,
         showcasing coordinated dual-arm manipulation across three progressively challenging tasks.
       </p>
-      <div class="video-placeholder main-video">
-        <div class="placeholder-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <div class="figures-row">
+        <div class="figure">
+          <div class="video-placeholder">
+            <div class="placeholder-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <p class="placeholder-label">Simulation</p>
+          </div>
         </div>
-        <p class="placeholder-label">Overview Video Coming Soon</p>
+        <div class="figure">
+          <div class="video-placeholder">
+            <div class="placeholder-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <p class="placeholder-label">Real Robot</p>
+          </div>
+        </div>
       </div>
+      <p class="caption"><strong>Video 1.</strong> Side-by-side overview of the bimanual scooping pipeline in simulation and on the real robot.</p>
     </section>
 
     <!-- 3. General Flowchart -->
@@ -108,35 +121,47 @@
         to grasp, reorient, and transfer rigid objects. We explore contact-rich strategies that
         leverage complementary hand roles (one stabilising, one manipulating) for robust pick-and-place.
       </p>
-      <div class="video-placeholder">
-        <div class="placeholder-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <div class="figures-row">
+        <div class="figure">
+          <div class="video-placeholder">
+            <div class="placeholder-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <p class="placeholder-label">Simulation</p>
+          </div>
         </div>
-        <p class="placeholder-label">Task 1 Video Coming Soon</p>
+        <div class="figure">
+          <div class="video-placeholder">
+            <div class="placeholder-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <p class="placeholder-label">Real Robot</p>
+          </div>
+        </div>
       </div>
-      <p class="caption"><strong>Video 1.</strong> Demonstration of bimanual manipulation on rigid household objects.</p>
+      <p class="caption"><strong>Video 2.</strong> Task 1 bimanual manipulation in simulation and on the real robot.</p>
 
       <div class="figures-row">
         <div class="figure">
           <div class="figure-placeholder">
-            <p class="placeholder-label">Grasp Planning Diagram</p>
+            <p class="placeholder-label">Vision Pipeline</p>
           </div>
-          <p class="caption"><strong>Figure 2a.</strong> Dual-arm grasp planning approach for complementary contact.</p>
+          <p class="caption"><strong>Figure 2a.</strong> Vision pipeline for object detection and pose estimation.</p>
         </div>
         <div class="figure">
           <div class="figure-placeholder">
-            <p class="placeholder-label">CV Method Diagram</p>
+            <p class="placeholder-label">AnyGrasp Planning</p>
           </div>
-          <p class="caption"><strong>Figure 2b.</strong> Vision pipeline for object pose estimation and grasp selection.</p>
+          <p class="caption"><strong>Figure 2b.</strong> AnyGrasp-based grasp pose generation and selection.</p>
         </div>
       </div>
 
       <div class="figures-row">
         <div class="figure figure-full">
           <div class="figure-placeholder">
-            <p class="placeholder-label">Manipulation Results</p>
+            <p class="placeholder-label">Runtime Visualization</p>
           </div>
-          <p class="caption"><strong>Figure 2c.</strong> Quantitative results across object categories showing success rates.</p>
+          <p class="caption"><strong>Figure 2c.</strong> Runtime visualization of the manipulation pipeline in action.</p>
         </div>
       </div>
     </section>
@@ -153,13 +178,25 @@
         perform stable grasps while in motion — requiring tight coupling between locomotion
         planning and manipulation control.
       </p>
-      <div class="video-placeholder">
-        <div class="placeholder-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <div class="figures-row">
+        <div class="figure">
+          <div class="video-placeholder">
+            <div class="placeholder-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <p class="placeholder-label">Simulation</p>
+          </div>
         </div>
-        <p class="placeholder-label">Task 2 Video Coming Soon</p>
+        <div class="figure">
+          <div class="video-placeholder">
+            <div class="placeholder-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <p class="placeholder-label">Real Robot</p>
+          </div>
+        </div>
       </div>
-      <p class="caption"><strong>Video 2.</strong> Mobile manipulation demo: navigating to and grasping objects while in motion.</p>
+      <p class="caption"><strong>Video 3.</strong> Task 2 mobile manipulation in simulation and on the real robot.</p>
 
       <div class="figures-row">
         <div class="figure">
@@ -173,15 +210,6 @@
             <p class="placeholder-label">Trajectory Visualization</p>
           </div>
           <p class="caption"><strong>Figure 3b.</strong> Base and end-effector trajectory coordination during approach.</p>
-        </div>
-      </div>
-
-      <div class="figures-row">
-        <div class="figure figure-full">
-          <div class="figure-placeholder">
-            <p class="placeholder-label">Locomotion + Manipulation Results</p>
-          </div>
-          <p class="caption"><strong>Figure 3c.</strong> Task completion rates comparing decoupled vs. integrated planning.</p>
         </div>
       </div>
     </section>
@@ -198,35 +226,56 @@
         excessive spillage. This requires adaptive force control and real-time compliance adjustment
         based on material feedback.
       </p>
-      <div class="video-placeholder">
-        <div class="placeholder-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
-        <p class="placeholder-label">Task 3 Video Coming Soon</p>
-      </div>
-      <p class="caption"><strong>Video 3.</strong> Bimanual scooping of granular material with adaptive force control.</p>
-
       <div class="figures-row">
         <div class="figure">
-          <div class="figure-placeholder">
-            <p class="placeholder-label">Scoop Geometry Planning</p>
+          <div class="video-placeholder">
+            <div class="placeholder-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <p class="placeholder-label">Simulation</p>
           </div>
-          <p class="caption"><strong>Figure 4a.</strong> Coordinated scoop pose generation for granular materials.</p>
         </div>
         <div class="figure">
-          <div class="figure-placeholder">
-            <p class="placeholder-label">Force Control Diagram</p>
+          <div class="video-placeholder">
+            <div class="placeholder-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <p class="placeholder-label">Real Robot</p>
           </div>
-          <p class="caption"><strong>Figure 4b.</strong> Adaptive compliance controller for material interaction.</p>
+        </div>
+      </div>
+      <p class="caption"><strong>Video 4.</strong> Task 3 bimanual scooping in simulation and on the real robot.</p>
+
+      <div class="figures-row">
+        <div class="figure figure-full">
+          <div class="figure-placeholder">
+            <p class="placeholder-label">Combined Scooping Pipeline</p>
+          </div>
+          <p class="caption"><strong>Figure 4a.</strong> End-to-end combined pipeline for bimanual scooping.</p>
         </div>
       </div>
 
       <div class="figures-row">
         <div class="figure figure-full">
           <div class="figure-placeholder">
-            <p class="placeholder-label">Scooping Results</p>
+            <p class="placeholder-label">Runtime Visualization</p>
           </div>
-          <p class="caption"><strong>Figure 4c.</strong> Material retention rates across scooping strategies and substrates.</p>
+          <p class="caption"><strong>Figure 4b.</strong> Runtime visualization of the scooping pipeline in action.</p>
+        </div>
+      </div>
+
+      <div class="figures-row">
+        <div class="figure">
+          <div class="figure-placeholder">
+            <p class="placeholder-label">Scoop Trajectory Visualization</p>
+          </div>
+          <p class="caption"><strong>Figure 4c.</strong> Visualization of the planned scoop trajectory and execution.</p>
+        </div>
+        <div class="figure">
+          <div class="figure-placeholder">
+            <p class="placeholder-label">ArUco Tag Vision</p>
+          </div>
+          <p class="caption"><strong>Figure 4d.</strong> ArUco tag-based pose estimation for scooping targets.</p>
         </div>
       </div>
     </section>

@@ -13,7 +13,7 @@
   --border-light: #DDD4C6;
   --sidebar-bg: linear-gradient(180deg, rgba(250, 247, 242, 0.92), rgba(237, 229, 216, 0.92));
   --sidebar-width: 220px;
-  --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-heading: 'Satoshi', 'Source Sans 3', Arial, Helvetica, sans-serif;
   --font-body: 'Source Sans 3', Arial, Helvetica, sans-serif;
   --radius: 6px;
   --shadow-sm: 0 1px 3px rgba(44, 36, 32, 0.06);
@@ -211,14 +211,14 @@ body {
 }
 
 .hero-description {
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: var(--text-secondary);
   line-height: 1.75;
   margin-bottom: var(--space-md);
 }
 
 .hero-authors {
-  margin-bottom: 6px;
+  margin-bottom: 12px;
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--text-primary);
@@ -233,7 +233,7 @@ body {
   font-size: 0.82rem;
   color: var(--text-muted);
   font-style: italic;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
 }
 
 .hero-affiliation {
@@ -330,7 +330,7 @@ body {
 }
 
 .section-text {
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: var(--text-secondary);
   line-height: 1.8;
   margin-bottom: var(--space-md);
@@ -462,7 +462,7 @@ body {
 
 /* ─── Captions ─────────────────────────────── */
 .caption {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 8px;
