@@ -1,11 +1,8 @@
-// ─── Scroll-Spy ───────────────────────────────
-// Highlights the sidebar link corresponding to the currently visible section.
-
 (function () {
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = [];
+  let currentActive = 'overview';
 
-  // Build section list from nav links
   navLinks.forEach(link => {
     const id = link.getAttribute('data-section');
     const el = document.getElementById(id);
@@ -13,32 +10,60 @@
   });
 
   function setActive(id) {
+    if (id === currentActive) return;
+    currentActive = id;
     navLinks.forEach(l => l.classList.remove('active'));
     const match = [...navLinks].find(l => l.getAttribute('data-section') === id);
     if (match) match.classList.add('active');
   }
 
-  // Use IntersectionObserver for performant scroll detection
-  const observer = new IntersectionObserver(
-    entries => {
-      // Find the topmost visible section
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-
-      if (visible.length > 0) {
-        setActive(visible[0].target.id);
+  // Scroll-spy: find the topmost section currently in the detection zone.
+  function updateScrollSpy() {
+    const viewportTop = window.scrollY;
+    const offset = window.innerHeight * 0.3;
+    let best = sections[0];
+    for (const s of sections) {
+      if (s.el.offsetTop <= viewportTop + offset) {
+        best = s;
       }
-    },
+    }
+    setActive(best.id);
+  }
+
+  const observer = new IntersectionObserver(
+    () => updateScrollSpy(),
     {
-      rootMargin: '-20% 0px -60% 0px',
-      threshold: 0,
+      rootMargin: '-10% 0px -50% 0px',
+      threshold: [0, 0.1, 0.5],
     }
   );
 
   sections.forEach(s => observer.observe(s.el));
 
-  // ─── Section Reveal Animations ────────────────
+  // Throttled scroll handler for fast-scroll reliability + progress bar
+  const progressBar = document.getElementById('scroll-progress');
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateScrollSpy();
+
+        // Update scroll progress bar
+        if (progressBar) {
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+          progressBar.style.width = progress + '%';
+        }
+
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Section reveal animations (staggered children handled by CSS)
   const revealObserver = new IntersectionObserver(
     entries => {
       entries.forEach(entry => {
@@ -48,39 +73,65 @@
         }
       });
     },
-    { threshold: 0.1 }
+    { threshold: 0.08, rootMargin: '0px 0px -60px 0px' }
   );
 
-  document.querySelectorAll('.section').forEach(s => revealObserver.observe(s));
+  document.querySelectorAll('.section, .footer').forEach(s => revealObserver.observe(s));
 
-  // ─── Mobile Nav Toggle ──────────────────────────
+  // Mobile nav toggle + scrim
   const toggle = document.getElementById('mobile-nav-toggle');
   const sidebar = document.getElementById('sidebar');
+  const scrim = document.getElementById('sidebar-scrim');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    if (scrim) scrim.classList.add('visible');
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    if (scrim) scrim.classList.remove('visible');
+  }
 
   if (toggle && sidebar) {
     toggle.addEventListener('click', () => {
-      sidebar.classList.toggle('open');
+      sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
     });
 
-    // Close sidebar when a nav link is clicked (mobile)
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-          sidebar.classList.remove('open');
-        }
+        if (window.innerWidth <= 768) closeSidebar();
       });
     });
 
-    // Close sidebar when clicking outside
+    if (scrim) {
+      scrim.addEventListener('click', closeSidebar);
+    }
+
     document.addEventListener('click', e => {
       if (
         window.innerWidth <= 768 &&
         sidebar.classList.contains('open') &&
         !sidebar.contains(e.target) &&
-        !toggle.contains(e.target)
+        !toggle.contains(e.target) &&
+        (!scrim || !scrim.contains(e.target))
       ) {
-        sidebar.classList.remove('open');
+        closeSidebar();
       }
     });
   }
+
+  // Smooth anchor scrolling with offset for fixed elements
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      const targetId = link.getAttribute('href').replace('#', '');
+      const target = document.getElementById(targetId);
+      if (target) {
+        e.preventDefault();
+        const offset = 24;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
 })();
