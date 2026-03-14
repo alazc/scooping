@@ -829,7 +829,7 @@ body {
 .flowchart {
   display: flex;
   flex-wrap: nowrap;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   gap: 0;
   margin-bottom: var(--space-md);
@@ -839,6 +839,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
   padding: 14px 18px;
   background: var(--bg-secondary);
@@ -893,19 +894,22 @@ body {
   padding: 0 8px;
   user-select: none;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 
 /* U-shape flowchart */
 .flowchart-u {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
-  margin-bottom: var(--space-md);
-  width: 100%;
+  gap: 44px;
+  width: fit-content;
+  margin: 0 auto var(--space-md);
 }
 
 .flowchart-row {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   gap: 0;
 }
@@ -914,12 +918,31 @@ body {
   /* visual only — HTML order already matches reading direction */
 }
 
-.flowchart-down-arrow {
-  text-align: right;
-  font-size: 1.6rem;
+.flowchart-u .flowchart-step {
+  justify-content: flex-start;
+}
+
+.flowchart--detailed .flowchart-step {
+  justify-content: flex-start;
+}
+
+.flowchart-step--connector {
+  position: relative;
+}
+
+.flowchart-step--connector::after {
+  content: "\2193";
+  position: absolute;
+  bottom: -44px;
+  left: 50%;
+  transform: translateX(-50%) scaleY(1.8);
+  font-size: 1.4rem;
   color: var(--accent-light);
-  padding: 6px 0;
   user-select: none;
+}
+
+.flowchart-down-arrow {
+  display: none;
 }
 
 /* ─── Tools Grid ──────────────────────────── */
