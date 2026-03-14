@@ -336,6 +336,84 @@ body {
   margin-bottom: var(--space-md);
 }
 
+/* ─── Video Link (clickable YouTube thumbnail) */
+.video-link {
+  display: block;
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1.5px solid var(--border-light);
+  margin-bottom: var(--space-sm);
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+
+.video-link:hover {
+  border-color: var(--accent-light);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.video-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--bg-secondary);
+}
+
+.video-link-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(44, 36, 32, 0.35);
+  transition: background var(--transition);
+}
+
+.video-link:hover .video-link-play {
+  background: rgba(44, 36, 32, 0.5);
+}
+
+.video-link-play svg {
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+  transition: transform var(--transition);
+}
+
+.video-link:hover .video-link-play svg {
+  transform: scale(1.15);
+}
+
+/* ─── Video Embed ──────────────────────────── */
+.video-embed {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border-light);
+  box-shadow: inset 0 2px 8px rgba(44, 36, 32, 0.04);
+  margin-bottom: var(--space-sm);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.video-embed:hover {
+  border-color: var(--border-color);
+  box-shadow: var(--shadow-md);
+}
+
+.video-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 /* ─── Video Placeholder ────────────────────── */
 .video-placeholder {
   position: relative;
@@ -450,6 +528,19 @@ body {
 
 .figures-row .figure-full {
   grid-column: 1 / -1;
+}
+
+/* Wide video row: breaks out of content margin, stays centered */
+.videos-wide {
+  display: grid;
+  gap: 24px;
+  margin-top: var(--space-lg);
+  width: 130%;
+  margin-left: -15%;
+}
+
+.videos-wide.proportional {
+  grid-template-columns: 1.778fr 0.5625fr;
 }
 
 .figure {
@@ -578,6 +669,43 @@ body {
     grid-template-columns: 1fr;
   }
 
+  .videos-wide {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .videos-wide.proportional {
+    grid-template-columns: 1fr;
+  }
+
+  .flowchart,
+  .flowchart-row {
+    flex-direction: column;
+  }
+
+  .flowchart-arrow {
+    transform: rotate(90deg);
+    padding: 4px 0;
+  }
+
+  .flowchart-row--reverse .flowchart-arrow {
+    transform: rotate(90deg);
+  }
+
+  .flowchart-down-arrow {
+    text-align: center;
+    padding-right: 0;
+  }
+
+  .flowchart-step {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+
   .footer {
     padding: var(--space-md) 24px;
   }
@@ -586,6 +714,173 @@ body {
     flex-direction: column;
     align-items: center;
   }
+}
+
+/* ─── Flowcharts ──────────────────────────── */
+.flowchart-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+  margin-top: var(--space-md);
+}
+
+.flowchart {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: var(--space-md);
+}
+
+.flowchart-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 14px 18px;
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius);
+  min-width: 120px;
+  max-width: 180px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.flowchart-step:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.flowchart-step--highlight {
+  border-color: var(--accent);
+  background: rgba(122, 82, 48, 0.06);
+}
+
+.step-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.step-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-bottom: 6px;
+}
+
+.flowchart-arrow {
+  font-size: 1.4rem;
+  color: var(--accent-light);
+  padding: 0 8px;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* U-shape flowchart */
+.flowchart-u {
+  margin-bottom: var(--space-md);
+}
+
+.flowchart-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.flowchart-row--reverse {
+  /* visual only — HTML order already matches reading direction */
+}
+
+.flowchart-down-arrow {
+  text-align: right;
+  font-size: 1.6rem;
+  color: var(--accent-light);
+  padding: 6px 0;
+  padding-right: calc(50% - 90px);
+  user-select: none;
+}
+
+/* ─── Tools Grid ──────────────────────────── */
+.tools-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: var(--space-sm);
+}
+
+.tools-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border-light);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.tools-grid img:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-color);
+}
+
+/* ─── Highlights Box ──────────────────────── */
+.highlights-box {
+  background: rgba(122, 82, 48, 0.05);
+  border: 1.5px solid rgba(122, 82, 48, 0.18);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.highlights-box h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.highlights-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.highlights-box li {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding-left: 18px;
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.highlights-box li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--accent-light);
+  font-size: 0.85rem;
 }
 
 /* ─── Animations ───────────────────────────── */
@@ -606,8 +901,15 @@ body {
   .section .section-header,
   .section .section-text,
   .section .video-placeholder,
+  .section .video-embed,
+  .section .video-link,
   .section .caption,
-  .section .figures-row {
+  .section .figures-row,
+  .section .flowchart-label,
+  .section .flowchart,
+  .section .flowchart-u,
+  .section .tools-grid,
+  .section .highlights-box {
     opacity: 0;
     transform: translateY(16px);
     transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
@@ -617,9 +919,16 @@ body {
   .section.visible .section-header   { opacity: 1; transform: translateY(0); transition-delay: 0.08s; }
   .section.visible .section-text     { opacity: 1; transform: translateY(0); transition-delay: 0.16s; }
   .section.visible .video-placeholder { opacity: 1; transform: translateY(0); transition-delay: 0.24s; }
+  .section.visible .video-embed      { opacity: 1; transform: translateY(0); transition-delay: 0.24s; }
+  .section.visible .video-link       { opacity: 1; transform: translateY(0); transition-delay: 0.24s; }
   .section.visible .caption          { opacity: 1; transform: translateY(0); transition-delay: 0.28s; }
   .section.visible .figures-row      { opacity: 1; transform: translateY(0); transition-delay: 0.32s; }
   .section.visible .figures-row + .figures-row { transition-delay: 0.40s; }
+  .section.visible .flowchart-label  { opacity: 1; transform: translateY(0); transition-delay: 0.20s; }
+  .section.visible .flowchart        { opacity: 1; transform: translateY(0); transition-delay: 0.28s; }
+  .section.visible .flowchart-u      { opacity: 1; transform: translateY(0); transition-delay: 0.28s; }
+  .section.visible .tools-grid       { opacity: 1; transform: translateY(0); transition-delay: 0.24s; }
+  .section.visible .highlights-box   { opacity: 1; transform: translateY(0); transition-delay: 0.36s; }
 
   /* Hero entrance: staggered children */
   .hero {
@@ -673,8 +982,15 @@ body {
   .section .section-header,
   .section .section-text,
   .section .video-placeholder,
+  .section .video-embed,
+  .section .video-link,
   .section .caption,
   .section .figures-row,
+  .section .flowchart-label,
+  .section .flowchart,
+  .section .flowchart-u,
+  .section .tools-grid,
+  .section .highlights-box,
   .footer {
     opacity: 1;
     transform: none;
