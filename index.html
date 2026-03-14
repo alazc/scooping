@@ -65,13 +65,13 @@
         <h2>Overview</h2>
       </div>
       <p class="section-text">
-        Three progressively challenging tasks: object manipulation, navigation-integrated grasping, and coordinated dual-arm candy scooping with tool use.
+        We demonstrate object manipulation, navigation-integrated grasping, and coordinated dual-arm candy scooping with tool use, in simulation and in the real world.
       </p>
 
       <!-- Task 3: Scooping sim — centered -->
       <div class="figures-row">
         <div class="figure figure-full">
-          <video style="width:100%; height:auto; border-radius: var(--radius); border: 1.5px solid var(--border-light);" controls muted loading="lazy" autoplay loop playsinline>
+          <video class="video-player" controls muted autoplay loop playsinline>
             <source src="./videos/Final/task-3-sim.mp4" type="video/mp4">
           </video>
           <p class="caption"><strong>Task 3.</strong> Bimanual candy scooping in simulation.</p>
@@ -81,13 +81,13 @@
       <!-- Task 1 & 2: sim on left, real on right — oversized & centered -->
       <div class="videos-wide proportional">
         <div class="figure">
-          <video style="width:100%; height:auto; border-radius: var(--radius); border: 1.5px solid var(--border-light);" controls muted loading="lazy" autoplay loop playsinline>
+          <video class="video-player" controls muted autoplay loop playsinline>
             <source src="./videos/Final/task-1-2-sim.mp4" type="video/mp4">
           </video>
           <p class="caption"><strong>Tasks 1 &amp; 2.</strong> Simulation (Opus 4.6)</p>
         </div>
         <div class="figure">
-          <video style="width:100%; height:auto; border-radius: var(--radius); border: 1.5px solid var(--border-light);" controls muted loading="lazy" autoplay loop playsinline>
+          <video class="video-player" controls muted autoplay loop playsinline>
             <source src="./videos/Final/task-1-2-real.mp4" type="video/mp4">
           </video>
           <p class="caption"><strong>Tasks 1 &amp; 2.</strong> Real Robot (Opus 4.6)</p>
@@ -101,7 +101,7 @@
         <h2>System Pipeline</h2>
       </div>
       <p class="section-text">
-        The control architecture connects perception, navigation, grasp planning, and a high-level controller. An initial state-machine approach was replaced by an LLM-powered controller (Claude Opus).
+        The control architecture connects perception, navigation, grasp planning, and a high-level controller. An initial state-machine approach was replaced by an LLM-powered controller (Claude Opus 4.6).
       </p>
 
       <!-- Flowchart 1: Week 8 Approach -->
@@ -158,7 +158,7 @@
       </div>
 
       <p class="caption">
-        <strong>Figure 1.</strong> System pipeline — perception, navigation, and grasp modules feed into a high-level controller (state machine or LLM).
+        <strong>Figure 1.</strong> System pipeline — perception, navigation, and grasp modules feed into a high-level controller (state machine or large language model).
       </p>
     </section>
 
@@ -169,12 +169,23 @@
         <h2>Manipulation &amp; Locomotion</h2>
       </div>
       <p class="section-text">
-        Dual-arm pick-and-place powered by RGB-D perception and real-time tracking. AnyGrasp processes depth and color data to generate 6-DOF grasp poses, while SAM3 provides segmentation masks for continuous object tracking as the arms move. Task 2 adds autonomous navigation — a PID-based controller handles straight-line path following and turning, coordinating base locomotion with arm manipulation.
+        Dual-arm pick-and-place powered by RGB-D perception, real-time tracking, and autonomous navigation. AnyGrasp processes depth and color data to generate 6-DOF grasp poses, while SAM3 provides segmentation masks for continuous object tracking as the arms move. A PID-based controller handles straight-line path following and turning, coordinating base locomotion with arm manipulation.
       </p>
+
+      <div class="highlights-box">
+        <h3>Key Components</h3>
+        <ul>
+          <li><strong>AnyGrasp server</strong> — generates 6-DOF grasp poses from RGB-D point clouds</li>
+          <li><strong>Iterative Closest Point (ICP)</strong> — aligns point clouds across frames for accurate grasp pose registration</li>
+          <li><strong>SAM3 tracker</strong> — provides segmentation masks for continuous object tracking with PID control</li>
+          <li><strong>PID navigation controller</strong> — handles straight-line path following and turning for autonomous locomotion</li>
+          <li><strong>Grasp detection</strong> — converts segmentation masks to gripper orientation for reliable picks</li>
+        </ul>
+      </div>
 
       <div class="gallery-wide">
         <img src="./videos/Final/task2-gallery.jpg" alt="Sequence of real robot actions showing CV detection, tracking, navigation, and scooping">
-        <p class="caption"><strong>Figure 1.</strong> Sequence of bimanual manipulation actions on the real robot — CV detection, object tracking, navigation, and task execution.</p>
+        <p class="caption"><strong>Figure 2.</strong> Sequence of manipulation actions on the real robot — CV detection, object tracking, navigation, and task execution.</p>
       </div>
 
       <div class="figures-row">
@@ -182,13 +193,13 @@
           <div class="img-equalize">
             <img src="./videos/Final/Anygrasp cloud banana.png" alt="AnyGrasp RGB-D point cloud — banana">
           </div>
-          <p class="caption"><strong>Figure 2a.</strong> AnyGrasp point cloud with grasp pose for a banana.</p>
+          <p class="caption"><strong>Figure 3a.</strong> AnyGrasp point cloud with grasp pose for a banana.</p>
         </div>
         <div class="figure">
-          <div class="img-equalize" style="padding-bottom: 4%;">
+          <div class="img-equalize">
             <img src="./videos/Final/Anygrasp cloud cube.png" alt="AnyGrasp RGB-D point cloud — cube">
           </div>
-          <p class="caption"><strong>Figure 2b.</strong> AnyGrasp point cloud with grasp pose for a cube.</p>
+          <p class="caption"><strong>Figure 3b.</strong> AnyGrasp point cloud with grasp pose for a cube.</p>
         </div>
       </div>
     </section>
@@ -230,7 +241,7 @@
           <div class="flowchart-arrow">&larr;</div>
           <div class="flowchart-step">
             <span class="step-num">5</span>
-            <span class="step-label">Move scoop to bucket</span>
+            <span class="step-label">Detect bucket center &amp; move scoop to bucket</span>
           </div>
           <div class="flowchart-arrow">&larr;</div>
           <div class="flowchart-step">
@@ -239,7 +250,7 @@
           </div>
         </div>
       </div>
-      <p class="caption"><strong>Figure 4a.</strong> End-to-end candy scooping pipeline with six coordinated steps.</p>
+      <p class="caption"><strong>Figure 4.</strong> Candy scooping pipeline with six coordinated steps.</p>
 
       <div class="highlights-box">
         <h3>Key Components</h3>
@@ -253,18 +264,18 @@
       <div class="figures-row">
         <div class="figure figure-full">
           <img src="./static/images/task 3/task 3 scene.png" alt="Task 3 scooping scene overview">
-          <p class="caption"><strong>Figure 3a.</strong> Task 3 scooping scene — bimanual candy scooping setup.</p>
+          <p class="caption"><strong>Figure 5a.</strong> Bimanual candy scooping scene setup.</p>
         </div>
       </div>
 
       <div class="figures-row">
         <div class="figure">
           <img src="./static/images/task 3/aruco tag detection.png" alt="ArUco tag detection for tool localization">
-          <p class="caption"><strong>Figure 3b.</strong> ArUco tag-based pose estimation for tool localization.</p>
+          <p class="caption"><strong>Figure 5b.</strong> ArUco tag-based pose estimation for tool localization.</p>
         </div>
         <div class="figure">
           <img src="./static/images/task 3/task 3 scooping perspective.png" alt="Scooping perspective view">
-          <p class="caption"><strong>Figure 3c.</strong> Scooping perspective during candy pickup.</p>
+          <p class="caption"><strong>Figure 5c.</strong> Scooping perspective during candy pickup.</p>
         </div>
       </div>
     </section>
@@ -280,18 +291,18 @@
       <div class="figures-row">
         <div class="figure">
           <img src="./static/images/tools/Teleop.png" alt="Teleoperation interface">
-          <p class="caption"><strong>Figure 4a.</strong> Teleoperation interface for manual robot control.</p>
+          <p class="caption"><strong>Figure 6a.</strong> Teleoperation interface for manual robot control.</p>
         </div>
         <div class="figure">
           <img src="./static/images/tools/display.png" alt="Real-time display tool">
-          <p class="caption"><strong>Figure 4b.</strong> Real-time sensor and state display.</p>
+          <p class="caption"><strong>Figure 6b.</strong> Real-time sensor and state display.</p>
         </div>
       </div>
 
       <div class="figures-row">
         <div class="figure figure-full">
           <img src="./static/images/tools/GUI.png" alt="Custom GUI for debugging">
-          <p class="caption"><strong>Figure 5.</strong> Custom GUI for debugging and pipeline control.</p>
+          <p class="caption"><strong>Figure 7.</strong> Custom GUI for debugging and pipeline control.</p>
         </div>
       </div>
 
@@ -300,7 +311,7 @@
           <div class="figure-placeholder">
             <p class="placeholder-label">Audio Tool</p>
           </div>
-          <p class="caption"><strong>Figure 6.</strong> Audio interface for voice-controlled interaction.</p>
+          <p class="caption"><strong>Figure 8.</strong> Audio interface for voice-controlled interaction.</p>
         </div>
       </div>
     </section>

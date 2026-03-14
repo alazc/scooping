@@ -336,6 +336,15 @@ body {
   margin-bottom: var(--space-md);
 }
 
+/* ─── Self-hosted Video Player ────────────── */
+.video-player {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border-light);
+  display: block;
+}
+
 /* ─── Video Link (clickable YouTube thumbnail) */
 .video-link {
   display: block;
@@ -586,7 +595,7 @@ body {
   border-color: var(--border-color);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .gallery-wide {
     width: 100%;
     margin-left: 0;
@@ -786,13 +795,20 @@ body {
     padding: 4px 0;
   }
 
-  .flowchart-row--reverse .flowchart-arrow {
-    transform: rotate(90deg);
+  .flowchart-row--reverse {
+    flex-direction: column-reverse;
   }
 
-  .flowchart-down-arrow {
+  .flowchart-row--reverse .flowchart-arrow {
+    transform: rotate(-90deg);
+  }
+
+  .flowchart-step--connector::after {
+    position: static;
+    transform: rotate(90deg);
+    display: block;
     text-align: center;
-    padding-right: 0;
+    padding: 4px 0;
   }
 
   .flowchart-step {
@@ -900,8 +916,8 @@ body {
 
 /* U-shape flowchart */
 .flowchart-u {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   gap: 44px;
   width: fit-content;
   margin: 0 auto var(--space-md);
@@ -920,6 +936,7 @@ body {
 
 .flowchart-u .flowchart-step {
   justify-content: flex-start;
+  min-height: 90px;
 }
 
 .flowchart--detailed .flowchart-step {
@@ -931,18 +948,14 @@ body {
 }
 
 .flowchart-step--connector::after {
-  content: "\2193";
+  content: "→";
   position: absolute;
-  bottom: -44px;
+  top: calc(100% + 11px);
   left: 50%;
-  transform: translateX(-50%) scaleY(1.8);
-  font-size: 1.4rem;
+  transform: translateX(-50%) rotate(90deg);
+  font-size: 1.41rem;
   color: var(--accent-light);
-  user-select: none;
-}
-
-.flowchart-down-arrow {
-  display: none;
+  line-height: 1;
 }
 
 /* ─── Tools Grid ──────────────────────────── */
