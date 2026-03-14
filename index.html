@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bimanual Granular Scooping – Team 2</title>
+  <title>Bimanual Granular Scooping</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,9 +21,8 @@
       <p class="sidebar-label">Contents</p>
       <ul class="sidebar-links">
         <li><a href="#overview" class="nav-link active" data-section="overview">Overview</a></li>
-        <li><a href="#flowchart" class="nav-link" data-section="flowchart">Flowchart</a></li>
-        <li><a href="#task1" class="nav-link" data-section="task1">Task 1: Manipulation</a></li>
-        <li><a href="#task2" class="nav-link" data-section="task2">Task 2: Manip. &amp; Loco.</a></li>
+        <li><a href="#flowchart" class="nav-link" data-section="flowchart">System Pipeline</a></li>
+        <li><a href="#task1-2" class="nav-link" data-section="task1-2">Tasks 1 &amp; 2: Manip. &amp; Loco.</a></li>
         <li><a href="#task3" class="nav-link" data-section="task3">Task 3: Scooping</a></li>
         <li><a href="#tools" class="nav-link" data-section="tools">Tools</a></li>
       </ul>
@@ -43,10 +42,9 @@
     <header class="hero" id="top">
       <div class="hero-inner">
         <p class="hero-tag">Collaborative Robotics &middot; Winter 2026</p>
-        <h1 class="hero-title">Bimanual Granular Scooping <span class="hero-team">Team 2</span></h1>
+        <h1 class="hero-title">Bimanual Granular Scooping</h1>
         <p class="hero-description">
-          Exploring bimanual coordination strategies for robust object manipulation,
-          locomotion-integrated grasping, and granular material scooping with dual robotic arms.
+          A dual-armed mobile robot that perceives objects through RGB-D sensing, plans grasps in 3D, navigates autonomously, and scoops granular materials using coordinated two-arm control.
         </p>
         <div class="hero-authors">
           <span class="author">Alaz Cig</span><span class="author-sep">&middot;</span><span class="author">Edward Lee</span><span class="author-sep">&middot;</span><span class="author">Haoyue Xiao</span><span class="author-sep">&middot;</span><span class="author">Jeffery Cai</span><span class="author-sep">&middot;</span><span class="author">Pengyu Mo</span><span class="author-sep">&middot;</span><span class="author">Saimai Lau</span><span class="author-sep">&middot;</span><span class="author">Zeyi Liu</span><span class="author-sep">&middot;</span><span class="author">Zhanyi Sun</span>
@@ -67,8 +65,7 @@
         <h2>Overview</h2>
       </div>
       <p class="section-text">
-        A high-level demonstration of our bimanual scooping pipeline,
-        showcasing coordinated dual-arm manipulation across three progressively challenging tasks.
+        Three progressively challenging tasks: object manipulation, navigation-integrated grasping, and coordinated dual-arm candy scooping with tool use.
       </p>
 
       <!-- Task 3: Scooping sim — centered -->
@@ -104,12 +101,11 @@
         <h2>System Pipeline</h2>
       </div>
       <p class="section-text">
-        Our system evolved from a state-machine controller to an LLM-driven architecture.
-        Below are both approaches, showing how the pipeline modules connect.
+        The control architecture connects perception, navigation, grasp planning, and a high-level controller. An initial state-machine approach was replaced by an LLM-powered controller (Claude Opus).
       </p>
 
       <!-- Flowchart 1: Week 8 Approach -->
-      <p class="flowchart-label">Week 8: State Machine + Vosk</p>
+      <p class="flowchart-label">Initial: State Machine + Vosk</p>
       <div class="flowchart">
         <div class="flowchart-step">
           <span class="step-label">AnyGrasp Server</span>
@@ -134,7 +130,7 @@
 
       <!-- Flowchart 2: Final Approach -->
       <p class="flowchart-label">Final: Claude Opus Controller</p>
-      <div class="flowchart">
+      <div class="flowchart flowchart--detailed">
         <div class="flowchart-step">
           <span class="step-label">AnyGrasp Server</span>
           <span class="step-sub">ICP + RGB &rarr; grasps</span>
@@ -155,81 +151,44 @@
           <span class="step-sub">mask &rarr; orientation</span>
         </div>
         <div class="flowchart-arrow">&rarr;</div>
-        <div class="flowchart-step flowchart-step--highlight">
+        <div class="flowchart-step">
           <span class="step-label">Claude Opus 4.6</span>
           <span class="step-sub">controls UI + mic + speaker</span>
         </div>
       </div>
 
       <p class="caption">
-        <strong>Figure 1.</strong> Evolution of the system architecture — from a rule-based state machine
-        with Vosk speech recognition to an LLM-powered controller using Claude Opus 4.6.
+        <strong>Figure 1.</strong> System pipeline — perception, navigation, and grasp modules feed into a high-level controller (state machine or LLM).
       </p>
     </section>
 
-    <!-- 4. Task 1: Manipulation -->
-    <section class="section" id="task1">
+    <!-- 4. Tasks 1 & 2: Manipulation & Locomotion -->
+    <section class="section" id="task1-2">
       <div class="section-header">
-        <span class="task-label">Task 1</span>
-        <h2>Manipulation</h2>
-      </div>
-      <p class="section-text">
-        The first task focuses on bimanual object manipulation using AnyGrasp for grasp pose
-        generation and SAM3 for real-time object tracking. The system processes RGB-D input
-        to detect grasp candidates, then uses segmentation masks with PID-based tracking to
-        coordinate dual-arm pick-and-place of rigid objects.
-      </p>
-
-      <div class="figures-row">
-        <div class="figure">
-          <div class="figure-placeholder">
-            <p class="placeholder-label">Vision Pipeline</p>
-          </div>
-          <p class="caption"><strong>Figure 2a.</strong> Vision pipeline for object detection and pose estimation.</p>
-        </div>
-        <div class="figure">
-          <div class="figure-placeholder">
-            <p class="placeholder-label">AnyGrasp Planning</p>
-          </div>
-          <p class="caption"><strong>Figure 2b.</strong> AnyGrasp-based grasp pose generation and selection.</p>
-        </div>
-      </div>
-
-      <div class="figures-row">
-        <div class="figure figure-full">
-          <div class="figure-placeholder">
-            <p class="placeholder-label">Runtime Visualization</p>
-          </div>
-          <p class="caption"><strong>Figure 2c.</strong> Runtime visualization of the manipulation pipeline in action.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. Task 2: Manipulation & Locomotion -->
-    <section class="section" id="task2">
-      <div class="section-header">
-        <span class="task-label">Task 2</span>
+        <span class="task-label">Tasks 1 &amp; 2</span>
         <h2>Manipulation &amp; Locomotion</h2>
       </div>
       <p class="section-text">
-        The second task adds a navigation action server to the Task 1 pipeline. The robot uses
-        PID control for straight-line path following with initial and ending turns to approach
-        target objects. It shares the same AnyGrasp + SAM3 methodology as Task 1, with the
-        addition of coordinated base locomotion during manipulation.
+        Dual-arm pick-and-place powered by RGB-D perception and real-time tracking. AnyGrasp processes depth and color data to generate 6-DOF grasp poses, while SAM3 provides segmentation masks for continuous object tracking as the arms move. Task 2 adds autonomous navigation — a PID-based controller handles straight-line path following and turning, coordinating base locomotion with arm manipulation.
       </p>
+
+      <div class="gallery-wide">
+        <img src="./videos/Final/task2-gallery.jpg" alt="Sequence of real robot actions showing CV detection, tracking, navigation, and scooping">
+        <p class="caption"><strong>Figure 1.</strong> Sequence of bimanual manipulation actions on the real robot — CV detection, object tracking, navigation, and task execution.</p>
+      </div>
 
       <div class="figures-row">
         <div class="figure">
-          <div class="figure-placeholder">
-            <p class="placeholder-label">Loco-Manipulation Pipeline</p>
+          <div class="img-equalize">
+            <img src="./videos/Final/Anygrasp cloud banana.png" alt="AnyGrasp RGB-D point cloud — banana">
           </div>
-          <p class="caption"><strong>Figure 3a.</strong> Integrated locomotion and manipulation planning architecture.</p>
+          <p class="caption"><strong>Figure 2a.</strong> AnyGrasp point cloud with grasp pose for a banana.</p>
         </div>
         <div class="figure">
-          <div class="figure-placeholder">
-            <p class="placeholder-label">Trajectory Visualization</p>
+          <div class="img-equalize" style="padding-bottom: 4%;">
+            <img src="./videos/Final/Anygrasp cloud cube.png" alt="AnyGrasp RGB-D point cloud — cube">
           </div>
-          <p class="caption"><strong>Figure 3b.</strong> Base and end-effector trajectory coordination during approach.</p>
+          <p class="caption"><strong>Figure 2b.</strong> AnyGrasp point cloud with grasp pose for a cube.</p>
         </div>
       </div>
     </section>
@@ -238,12 +197,10 @@
     <section class="section" id="task3">
       <div class="section-header">
         <span class="task-label">Task 3</span>
-        <h2>Scooping</h2>
+        <h2>Scooping Granular Objects</h2>
       </div>
       <p class="section-text">
-        The final task combines everything into a candy pickup pipeline: the robot picks up a scoop
-        and bucket, moves to the candy box, scoops candy, and drops it in the bucket. This integrates
-        bimanual grasping, navigation, and coordinated tool use into a single end-to-end sequence.
+        Full candy scooping pipeline: the robot grasps a scoop and bucket, navigates to a candy box, scoops the candy, and transfers it to the bucket. This integrates bimanual grasping, autonomous navigation, and coordinated tool use in one continuous sequence.
       </p>
 
       <!-- U-shape pipeline flowchart -->
@@ -252,8 +209,7 @@
         <div class="flowchart-row">
           <div class="flowchart-step">
             <span class="step-num">1</span>
-            <span class="step-label">Detect ArUco markers</span>
-            <span class="step-sub">on tools</span>
+            <span class="step-label">Detect ArUco markers on tools</span>
           </div>
           <div class="flowchart-arrow">&rarr;</div>
           <div class="flowchart-step">
@@ -261,12 +217,11 @@
             <span class="step-label">Pick up scoop &amp; bucket</span>
           </div>
           <div class="flowchart-arrow">&rarr;</div>
-          <div class="flowchart-step">
+          <div class="flowchart-step flowchart-step--connector">
             <span class="step-num">3</span>
             <span class="step-label">Move to candy box</span>
           </div>
         </div>
-        <div class="flowchart-down-arrow">&darr;</div>
         <div class="flowchart-row flowchart-row--reverse">
           <div class="flowchart-step">
             <span class="step-num">6</span>
@@ -289,33 +244,27 @@
       <div class="highlights-box">
         <h3>Key Components</h3>
         <ul>
-          <li><strong>ArUco detection node</strong> — localizes scoop and bucket via fiducial markers</li>
+          <li><strong>ArUco detection node</strong> — locates the scoop and bucket using ArUco fiducial markers</li>
           <li><strong>Execute grasp server</strong> — coordinates bimanual grasp sequences</li>
-          <li><strong>Waypoint trajectories</strong> — pre-planned arm paths for scooping and transfer motions</li>
+          <li><strong>Waypoint trajectories</strong> — arm paths for scooping and transfer motions</li>
         </ul>
       </div>
 
       <div class="figures-row">
         <div class="figure figure-full">
-          <div class="figure-placeholder">
-            <p class="placeholder-label">Runtime Visualization</p>
-          </div>
-          <p class="caption"><strong>Figure 4b.</strong> Runtime visualization of the scooping pipeline in action.</p>
+          <img src="./static/images/task 3/task 3 scene.png" alt="Task 3 scooping scene overview">
+          <p class="caption"><strong>Figure 3a.</strong> Task 3 scooping scene — bimanual candy scooping setup.</p>
         </div>
       </div>
 
       <div class="figures-row">
         <div class="figure">
-          <div class="figure-placeholder">
-            <p class="placeholder-label">Scoop Trajectory Visualization</p>
-          </div>
-          <p class="caption"><strong>Figure 4c.</strong> Visualization of the planned scoop trajectory and execution.</p>
+          <img src="./static/images/task 3/aruco tag detection.png" alt="ArUco tag detection for tool localization">
+          <p class="caption"><strong>Figure 3b.</strong> ArUco tag-based pose estimation for tool localization.</p>
         </div>
         <div class="figure">
-          <div class="figure-placeholder">
-            <p class="placeholder-label">ArUco Tag Vision</p>
-          </div>
-          <p class="caption"><strong>Figure 4d.</strong> ArUco tag-based pose estimation for scooping targets.</p>
+          <img src="./static/images/task 3/task 3 scooping perspective.png" alt="Scooping perspective view">
+          <p class="caption"><strong>Figure 3c.</strong> Scooping perspective during candy pickup.</p>
         </div>
       </div>
     </section>
@@ -326,19 +275,43 @@
         <h2>Development &amp; Debugging Tools</h2>
       </div>
       <p class="section-text">
-        Custom visualization and debugging tools built throughout the project to accelerate
-        development, diagnose perception issues, and validate grasp planning in real time.
+        Custom tools for visualizing sensor streams, diagnosing perception failures, and validating grasp plans before deploying to hardware.
       </p>
-      <div class="tools-grid">
-        <img src="static/images/slide3_img1.png" alt="Development tool screenshot 1">
-        <img src="static/images/slide3_img2.png" alt="Development tool screenshot 2">
-        <img src="static/images/slide3_img3.png" alt="Development tool screenshot 3">
-        <img src="static/images/slide3_img4.png" alt="Development tool screenshot 4">
+      <div class="figures-row">
+        <div class="figure">
+          <img src="./static/images/tools/Teleop.png" alt="Teleoperation interface">
+          <p class="caption"><strong>Figure 4a.</strong> Teleoperation interface for manual robot control.</p>
+        </div>
+        <div class="figure">
+          <img src="./static/images/tools/display.png" alt="Real-time display tool">
+          <p class="caption"><strong>Figure 4b.</strong> Real-time sensor and state display.</p>
+        </div>
       </div>
-      <p class="caption"><strong>Figure 5.</strong> Screenshots of custom development and debugging tools used during the project.</p>
+
+      <div class="figures-row">
+        <div class="figure figure-full">
+          <img src="./static/images/tools/GUI.png" alt="Custom GUI for debugging">
+          <p class="caption"><strong>Figure 5.</strong> Custom GUI for debugging and pipeline control.</p>
+        </div>
+      </div>
+
+      <div class="figures-row">
+        <div class="figure figure-full">
+          <div class="figure-placeholder">
+            <p class="placeholder-label">Audio Tool</p>
+          </div>
+          <p class="caption"><strong>Figure 6.</strong> Audio interface for voice-controlled interaction.</p>
+        </div>
+      </div>
     </section>
 
   </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <img src="https://identity.stanford.edu/wp-content/uploads/sites/3/2020/07/block-s-right.png" alt="Stanford University" class="footer-logo">
+    </div>
+  </footer>
 
   <script src="script.js"></script>
 </body>

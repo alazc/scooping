@@ -1,1 +1,2 @@
 *.mp4 filter=lfs diff=lfs merge=lfs -text
+videos/Final/task-3-sim.mp4 !filter !diff !merge
