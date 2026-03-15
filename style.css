@@ -803,6 +803,47 @@ body {
     transform: rotate(-90deg);
   }
 
+  .arch-layer-tag {
+    min-width: auto;
+    width: 100%;
+    justify-content: flex-start;
+    padding-bottom: 4px;
+  }
+
+  .arch-layer {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .arch-arrows {
+    margin-left: 0;
+  }
+
+  .arch-arrows::before {
+    transform: translateX(-50%);
+  }
+
+  .arch-arrows::after {
+    left: 50%;
+  }
+
+  .arch-arrow-label {
+    margin-left: 0;
+  }
+
+  .arch-node {
+    max-width: none;
+  }
+
+  .arch-node--controller {
+    max-width: none;
+  }
+
+  .arch-evolution-arrow {
+    transform: rotate(90deg);
+    padding: 4px 0;
+  }
+
   .flowchart-step--connector::after {
     position: static;
     transform: rotate(90deg);
@@ -1021,6 +1062,166 @@ body {
   font-size: 0.85rem;
 }
 
+/* ─── Architecture Graph ─────────────────────── */
+.arch-graph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin-bottom: var(--space-md);
+  width: 100%;
+}
+
+.arch-layer {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  width: 100%;
+}
+
+.arch-layer-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  min-width: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  padding-right: 4px;
+}
+
+.arch-nodes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 1;
+  justify-content: center;
+}
+
+.arch-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius);
+  flex: 1 1 90px;
+  max-width: 150px;
+  min-width: 80px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.arch-node:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.arch-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.arch-detail {
+  font-size: 0.67rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  line-height: 1.2;
+}
+
+.arch-node--external {
+  border-color: var(--accent-light);
+  background: rgba(122, 82, 48, 0.05);
+}
+
+.arch-node--controller {
+  border-color: var(--accent);
+  background: rgba(122, 82, 48, 0.08);
+  max-width: 260px;
+  flex: 1 1 200px;
+}
+
+.arch-node--initial {
+  border-color: var(--border-color);
+  background: var(--bg-secondary);
+  opacity: 0.7;
+}
+
+.arch-node--final {
+  border-color: var(--accent);
+  background: rgba(122, 82, 48, 0.10);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.arch-nodes--evolution {
+  align-items: center;
+}
+
+.arch-evolution-arrow {
+  font-size: 1.3rem;
+  color: var(--accent);
+  font-weight: 700;
+  flex-shrink: 0;
+  padding: 0 6px;
+  user-select: none;
+}
+
+.arch-node--hw {
+  border-style: dashed;
+  border-color: var(--border-light);
+}
+
+.arch-arrows {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 0;
+  position: relative;
+  width: 100%;
+  margin-left: 80px;
+}
+
+.arch-arrows::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: var(--border-color);
+  transform: translateX(calc(-50% + 40px));
+}
+
+.arch-arrows::after {
+  content: '';
+  position: absolute;
+  left: calc(50% + 40px);
+  bottom: -1px;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid var(--border-color);
+  border-bottom: 1.5px solid var(--border-color);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.arch-arrow-label {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  background: var(--bg-primary);
+  padding: 0 6px;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.03em;
+  margin-left: 80px;
+}
+
 /* ─── Animations ───────────────────────────── */
 @media (prefers-reduced-motion: no-preference) {
   .section {
@@ -1047,7 +1248,8 @@ body {
   .section .flowchart,
   .section .flowchart-u,
   .section .tools-grid,
-  .section .highlights-box {
+  .section .highlights-box,
+  .section .arch-graph {
     opacity: 0;
     transform: translateY(16px);
     transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
@@ -1067,6 +1269,7 @@ body {
   .section.visible .flowchart-u      { opacity: 1; transform: translateY(0); transition-delay: 0.28s; }
   .section.visible .tools-grid       { opacity: 1; transform: translateY(0); transition-delay: 0.24s; }
   .section.visible .highlights-box   { opacity: 1; transform: translateY(0); transition-delay: 0.36s; }
+  .section.visible .arch-graph       { opacity: 1; transform: translateY(0); transition-delay: 0.36s; }
 
   /* Hero entrance: staggered children */
   .hero {
@@ -1129,6 +1332,7 @@ body {
   .section .flowchart-u,
   .section .tools-grid,
   .section .highlights-box,
+  .section .arch-graph,
   .footer {
     opacity: 1;
     transform: none;
