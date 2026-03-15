@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bimanual Granular Scooping</title>
-  <meta name="description" content="A dual-armed mobile robot that perceives objects through RGB-D sensing, plans grasps in 3D, navigates autonomously, and scoops granular materials using coordinated two-arm control. Stanford ME 326, Winter 2026.">
+  <meta name="description" content="A bimanual mobile robot that perceives objects through RGB-D sensing, plans grasps in 3D, navigates autonomously, and scoops granular materials using coordinated two-arm control. Stanford ME 326, Winter 2026.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
       <p class="sidebar-label">Contents</p>
       <ul class="sidebar-links">
         <li><a href="#overview" class="nav-link active" data-section="overview">Overview</a></li>
-        <li><a href="#flowchart" class="nav-link" data-section="flowchart">System Pipeline</a></li>
+        <li><a href="#flowchart" class="nav-link" data-section="flowchart">System Architecture</a></li>
         <li><a href="#task1-2" class="nav-link" data-section="task1-2">Tasks 1 &amp; 2: Manip. &amp; Loco.</a></li>
         <li><a href="#task3" class="nav-link" data-section="task3">Task 3: Scooping</a></li>
         <li><a href="#tools" class="nav-link" data-section="tools">Tools</a></li>
@@ -46,7 +46,7 @@
         <p class="hero-tag">Collaborative Robotics &middot; Winter 2026</p>
         <h1 class="hero-title">Bimanual Granular Scooping</h1>
         <p class="hero-description">
-          A dual-armed mobile robot that perceives objects through RGB-D sensing, plans grasps in 3D, navigates autonomously, and scoops granular materials using coordinated two-arm control.
+          A bimanual mobile robot that perceives objects through RGB-D sensing, plans grasps in 3D, navigates autonomously, and scoops granular materials using coordinated two-arm control.
         </p>
         <div class="hero-authors">
           <span class="author">Alaz Cig</span><span class="author-sep">&middot;</span><span class="author">Edward Lee</span><span class="author-sep">&middot;</span><span class="author">Haoyue Xiao</span><span class="author-sep">&middot;</span><span class="author">Jeffery Cai</span><span class="author-sep">&middot;</span><span class="author">Pengyu Mo</span><span class="author-sep">&middot;</span><span class="author">Saimai Lau</span><span class="author-sep">&middot;</span><span class="author">Zeyi Liu</span><span class="author-sep">&middot;</span><span class="author">Zhanyi Sun</span>
@@ -67,7 +67,7 @@
         <h2>Overview</h2>
       </div>
       <p class="section-text">
-        We demonstrate object manipulation, navigation-integrated grasping, and coordinated dual-arm candy scooping with tool use, in simulation and in the real world.
+        We demonstrate object manipulation, navigation-integrated grasping, and coordinated bimanual candy scooping with tool use, in simulation and in the real world.
       </p>
 
       <!-- Task 3: Scooping sim — centered -->
@@ -100,67 +100,129 @@
     <!-- 3. General Flowchart -->
     <section class="section" id="flowchart">
       <div class="section-header">
-        <h2>System Pipeline</h2>
+        <h2>System Architecture</h2>
       </div>
       <p class="section-text">
-        The control architecture connects perception, navigation, grasp planning, and a high-level controller. An initial state-machine approach was replaced by an LLM-powered controller (Claude Opus 4.6).
+        The control architecture connects perception, navigation, grasp planning, and a high-level controller. An initial state-machine approach was augmented with an LLM-powered controller (Claude Opus 4.6) for voice-driven interaction.
       </p>
 
-      <!-- Flowchart 1: Week 8 Approach -->
-      <p class="flowchart-label">Initial: State Machine + Vosk</p>
-      <div class="flowchart">
-        <div class="flowchart-step">
-          <span class="step-label">AnyGrasp Server</span>
-        </div>
-        <div class="flowchart-arrow">&rarr;</div>
-        <div class="flowchart-step">
-          <span class="step-label">SAM3 Tracker</span>
-        </div>
-        <div class="flowchart-arrow">&rarr;</div>
-        <div class="flowchart-step">
-          <span class="step-label">Navigation Server</span>
-        </div>
-        <div class="flowchart-arrow">&rarr;</div>
-        <div class="flowchart-step">
-          <span class="step-label">Grasp Detection</span>
-        </div>
-        <div class="flowchart-arrow">&rarr;</div>
-        <div class="flowchart-step">
-          <span class="step-label">State Machine + Vosk Speech</span>
-        </div>
-      </div>
+      <!-- Node Communication Graph -->
+      <div class="arch-graph">
 
-      <!-- Flowchart 2: Final Approach -->
-      <p class="flowchart-label">Final: Claude Opus Controller</p>
-      <div class="flowchart flowchart--detailed">
-        <div class="flowchart-step">
-          <span class="step-label">AnyGrasp Server</span>
-          <span class="step-sub">ICP + RGB &rarr; grasps</span>
+        <div class="arch-layer">
+          <div class="arch-layer-tag">External</div>
+          <div class="arch-nodes">
+            <div class="arch-node arch-node--external">
+              <span class="arch-name">SAM3 GPU</span>
+              <span class="arch-detail">ZMQ :5559</span>
+            </div>
+            <div class="arch-node arch-node--external">
+              <span class="arch-name">AnyGrasp GPU</span>
+              <span class="arch-detail">ZMQ :5557</span>
+            </div>
+            <div class="arch-node arch-node--external">
+              <span class="arch-name">Google Cloud</span>
+              <span class="arch-detail">STT / TTS</span>
+            </div>
+            <div class="arch-node arch-node--external">
+              <span class="arch-name">Gemini</span>
+              <span class="arch-detail">task parsing</span>
+            </div>
+          </div>
         </div>
-        <div class="flowchart-arrow">&rarr;</div>
-        <div class="flowchart-step">
-          <span class="step-label">SAM3 Tracker</span>
-          <span class="step-sub">masks, PID tracking</span>
-        </div>
-        <div class="flowchart-arrow">&rarr;</div>
-        <div class="flowchart-step">
-          <span class="step-label">Navigation Server</span>
-          <span class="step-sub">PID path + turns</span>
-        </div>
-        <div class="flowchart-arrow">&rarr;</div>
-        <div class="flowchart-step">
-          <span class="step-label">Grasp Detection</span>
-          <span class="step-sub">mask &rarr; orientation</span>
-        </div>
-        <div class="flowchart-arrow">&rarr;</div>
-        <div class="flowchart-step">
-          <span class="step-label">Claude Opus 4.6</span>
-          <span class="step-sub">controls UI + mic + speaker</span>
-        </div>
-      </div>
 
+        <div class="arch-arrows"><span class="arch-arrow-label">ZMQ / gRPC</span></div>
+
+        <div class="arch-layer">
+          <div class="arch-layer-tag">Perception</div>
+          <div class="arch-nodes">
+            <div class="arch-node">
+              <span class="arch-name">SAM3 Tracker</span>
+              <span class="arch-detail">masks + camera tracking</span>
+            </div>
+            <div class="arch-node">
+              <span class="arch-name">AnyGrasp Server</span>
+              <span class="arch-detail">ICP + 6-DOF grasps</span>
+            </div>
+            <div class="arch-node">
+              <span class="arch-name">ArUco Node</span>
+              <span class="arch-detail">fiducial detection</span>
+            </div>
+            <div class="arch-node">
+              <span class="arch-name">Camera Driver</span>
+              <span class="arch-detail">RGB-D streams</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="arch-arrows"><span class="arch-arrow-label">topics + services</span></div>
+
+        <div class="arch-layer">
+          <div class="arch-layer-tag">Controller</div>
+          <div class="arch-nodes arch-nodes--evolution">
+            <div class="arch-node arch-node--controller arch-node--initial">
+              <span class="arch-name">State Machine + Vosk</span>
+              <span class="arch-detail">rule-based orchestration</span>
+            </div>
+            <div class="arch-evolution-arrow">&rarr;</div>
+            <div class="arch-node arch-node--controller arch-node--final">
+              <span class="arch-name">Claude Opus + GCP Speech</span>
+              <span class="arch-detail">LLM-driven orchestration</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="arch-arrows"><span class="arch-arrow-label">actions + services</span></div>
+
+        <div class="arch-layer">
+          <div class="arch-layer-tag">Execution</div>
+          <div class="arch-nodes">
+            <div class="arch-node">
+              <span class="arch-name">Execute Grasp</span>
+              <span class="arch-detail">approach &rarr; grasp &rarr; retreat</span>
+            </div>
+            <div class="arch-node">
+              <span class="arch-name">Navigator</span>
+              <span class="arch-detail">3-phase PID</span>
+            </div>
+            <div class="arch-node">
+              <span class="arch-name">Dropoff</span>
+              <span class="arch-detail">place + release</span>
+            </div>
+            <div class="arch-node">
+              <span class="arch-name">Motion Planner</span>
+              <span class="arch-detail">IK solving</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="arch-arrows"><span class="arch-arrow-label">joint commands + velocity</span></div>
+
+        <div class="arch-layer">
+          <div class="arch-layer-tag">Hardware</div>
+          <div class="arch-nodes">
+            <div class="arch-node arch-node--hw">
+              <span class="arch-name">Arms</span>
+              <span class="arch-detail">/joint_cmd</span>
+            </div>
+            <div class="arch-node arch-node--hw">
+              <span class="arch-name">Base</span>
+              <span class="arch-detail">/cmd_vel</span>
+            </div>
+            <div class="arch-node arch-node--hw">
+              <span class="arch-name">Grippers</span>
+              <span class="arch-detail">/gripper/cmd</span>
+            </div>
+            <div class="arch-node arch-node--hw">
+              <span class="arch-name">Camera Servo</span>
+              <span class="arch-detail">/pan_tilt_cmd</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
       <p class="caption">
-        <strong>Figure 1.</strong> System pipeline — perception, navigation, and grasp modules feed into a high-level controller (state machine or large language model).
+        <strong>Figure 1.</strong> ROS 2 node architecture — external GPU servers handle perception inference, a high-level controller orchestrates all modules via services and actions, and execution nodes translate plans into hardware commands.
       </p>
     </section>
 
@@ -171,17 +233,17 @@
         <h2>Manipulation &amp; Locomotion</h2>
       </div>
       <p class="section-text">
-        Dual-arm pick-and-place powered by RGB-D perception, real-time tracking, and autonomous navigation. AnyGrasp processes depth and color data to generate 6-DOF grasp poses, while SAM3 provides segmentation masks for continuous object tracking as the arms move. A PID-based controller handles straight-line path following and turning, coordinating base locomotion with arm manipulation.
+        Bimanual pick-and-place powered by RGB-D perception, real-time tracking, and autonomous navigation. AnyGrasp processes depth and color data to generate 6-DOF grasp poses, while SAM3 provides segmentation masks for continuous object tracking as the arms move. A PID-based controller handles straight-line path following and turning, coordinating base locomotion with arm manipulation.
       </p>
 
       <div class="highlights-box">
         <h3>Key Components</h3>
         <ul>
           <li><strong>AnyGrasp server</strong> — generates 6-DOF grasp poses from RGB-D point clouds</li>
-          <li><strong>Iterative Closest Point (ICP)</strong> — aligns point clouds across frames for accurate grasp pose registration</li>
-          <li><strong>SAM3 tracker</strong> — provides segmentation masks for continuous object tracking with PID control</li>
+          <li><strong>Iterative Closest Point (ICP)</strong> — refines point clouds using STL models before grasp detection</li>
+          <li><strong>SAM3 tracker</strong> — provides segmentation masks for continuous object tracking with proportional camera control</li>
           <li><strong>PID navigation controller</strong> — handles straight-line path following and turning for autonomous locomotion</li>
-          <li><strong>Grasp detection</strong> — converts segmentation masks to gripper orientation for reliable picks</li>
+          <li><strong>Execute grasp server</strong> — plans and executes 6-DOF grasps from AnyGrasp poses</li>
         </ul>
       </div>
 
@@ -206,7 +268,7 @@
       </div>
     </section>
 
-    <!-- 4. Task 3: Scooping -->
+    <!-- 5. Task 3: Scooping -->
     <section class="section" id="task3">
       <div class="section-header">
         <span class="task-label">Task 3</span>
@@ -282,7 +344,7 @@
       </div>
     </section>
 
-    <!-- 5. Development Tools -->
+    <!-- 6. Development Tools -->
     <section class="section" id="tools">
       <div class="section-header">
         <h2>Development &amp; Debugging Tools</h2>
@@ -304,16 +366,14 @@
       <div class="figures-row">
         <div class="figure figure-full">
           <img src="./images/tools/GUI.png" alt="Custom GUI for debugging">
-          <p class="caption"><strong>Figure 7.</strong> Custom GUI for debugging and pipeline control.</p>
+          <p class="caption"><strong>Figure 7.</strong> Demo recorder GUI — originally built to record demonstrations for training a VLA/ACT policy. Claude Opus was later integrated as a controller to automate the demonstration process.</p>
         </div>
       </div>
 
       <div class="figures-row">
         <div class="figure figure-full">
-          <div class="figure-placeholder">
-            <p class="placeholder-label">Audio Tool</p>
-          </div>
-          <p class="caption"><strong>Figure 8.</strong> Audio interface for voice-controlled interaction.</p>
+          <img src="./images/tools/claude-control.png" alt="Claude Control panel with active listening toggle">
+          <p class="caption"><strong>Figure 8.</strong> Claude Control panel — voice-driven interaction via GCP Speech-to-Text and Text-to-Speech, Gemini task parsing, and active listening with keyword detection.</p>
         </div>
       </div>
     </section>
