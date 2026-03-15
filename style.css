@@ -813,6 +813,7 @@ body {
   .arch-layer {
     flex-direction: column;
     gap: 4px;
+    padding: 8px 10px;
   }
 
   .arch-arrows {
@@ -1077,6 +1078,10 @@ body {
   align-items: stretch;
   gap: 12px;
   width: 100%;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  background: var(--bg-primary);
 }
 
 .arch-layer-tag {
