@@ -813,6 +813,7 @@ body {
   .arch-layer {
     flex-direction: column;
     gap: 4px;
+    padding: 8px 10px;
   }
 
   .arch-arrows {
@@ -829,6 +830,21 @@ body {
 
   .arch-arrow-label {
     margin-left: 0;
+  }
+
+  .arch-arrows-spacer {
+    display: none;
+  }
+
+  .arch-arrows--multi {
+    flex-wrap: wrap;
+    gap: 0;
+    justify-content: center;
+  }
+
+  .arch-arrow-pair {
+    flex: 1 1 50%;
+    max-width: none;
   }
 
   .arch-node {
@@ -1067,7 +1083,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
+  gap: 8px;
   margin-bottom: var(--space-md);
   width: 100%;
 }
@@ -1077,6 +1093,10 @@ body {
   align-items: stretch;
   gap: 12px;
   width: 100%;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  background: var(--bg-primary);
 }
 
 .arch-layer-tag {
@@ -1142,22 +1162,8 @@ body {
 }
 
 .arch-node--controller {
-  border-color: var(--accent);
-  background: rgba(122, 82, 48, 0.08);
   max-width: 260px;
   flex: 1 1 200px;
-}
-
-.arch-node--initial {
-  border-color: var(--border-color);
-  background: var(--bg-secondary);
-  opacity: 0.7;
-}
-
-.arch-node--final {
-  border-color: var(--accent);
-  background: rgba(122, 82, 48, 0.10);
-  box-shadow: 0 0 0 2px var(--accent-glow);
 }
 
 .arch-nodes--evolution {
@@ -1182,10 +1188,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4px 0;
+  padding: 10px 0;
   position: relative;
   width: 100%;
-  margin-left: 80px;
 }
 
 .arch-arrows::before {
@@ -1212,7 +1217,7 @@ body {
 }
 
 .arch-arrow-label {
-  font-size: 0.6rem;
+  font-size: 0.68rem;
   color: var(--text-muted);
   background: var(--bg-primary);
   padding: 0 6px;
@@ -1220,6 +1225,67 @@ body {
   z-index: 1;
   letter-spacing: 0.03em;
   margin-left: 80px;
+}
+
+/* Multi-arrow row between External and Perception */
+.arch-arrows--multi {
+  display: flex;
+  padding: 2px 0;
+  margin-left: 0;
+  overflow: visible;
+}
+
+.arch-arrows--multi::before,
+.arch-arrows--multi::after {
+  display: none;
+}
+
+.arch-arrows-spacer {
+  min-width: 68px;
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+
+.arch-arrow-pair {
+  flex: 2 1 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 306px;
+}
+
+.arch-arrow-vert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 36px;
+  width: 1.5px;
+  background: var(--border-color);
+}
+
+.arch-arrow-vert::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid var(--border-color);
+  border-bottom: 1.5px solid var(--border-color);
+  transform: translateX(-0.25px) rotate(45deg);
+}
+
+.arch-arrow-vert-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  background: var(--bg-primary);
+  padding: 0 6px;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
 }
 
 /* ─── Animations ───────────────────────────── */
