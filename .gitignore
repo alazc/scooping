@@ -3,3 +3,8 @@ junk/
 videos/.claude/
 .gstack/
 mujoco/
+.playwright-mcp/
+grasp-figure-preview.png
+svg-figure-check.png
+svg-figure-v2.png
+svg-figure-viewport.png
